@@ -4,7 +4,7 @@ from flask import Flask, Response, abort, jsonify, request
 from yfinance import Ticker
 
 
-def __get_endpoint_map() -> dict[str, Callable]:
+def _get_endpoint_map() -> dict[str, Callable]:
     return {
         'actions': _actions,
         'balance-sheet': _balance_sheet,
@@ -28,7 +28,7 @@ def __get_endpoint_map() -> dict[str, Callable]:
 def _add_ticker_api_routes(app: Flask) -> None:
     @app.get('/api/<endpoint>')
     def ticker_callback(endpoint: str) -> Response:
-        endpoint_map: dict[str, Callable] = __get_endpoint_map()
+        endpoint_map: dict[str, Callable] = _get_endpoint_map()
 
         try:
             ticker: str = request.headers['ticker']

@@ -4,37 +4,36 @@ from flask import Flask, Response, abort, jsonify, request
 from yfinance import Ticker
 
 
-def _get_endpoint_map() -> dict[str, Callable]:
+def __get_endpoint_map() -> dict[str, Callable]:
     return {
-        'actions': _actions,
-        'balance-sheet': _balance_sheet,
-        'cash-flow': _cash_flow,
-        'capital-gains': _capital_gains,
-        'dividends': _dividends,
-        'fast-info': _fast_info,
-        'financials': _financials,
-        'history-metadata': _history_metadata,
-        'income-stmt': _income_stmt,
-        'info': _info,
-        'institutional-holders': _institutional_holders,
-        'isin': _isin,
-        'major-holders': _major_holders,
-        'mutualfund-holders': _mutualfund_holders,
-        'news': _news,
-        'splits': _splits
+        'actions': __actions,
+        'balance-sheet': __balance_sheet,
+        'cash-flow': __cash_flow,
+        'capital-gains': __capital_gains,
+        'dividends': __dividends,
+        'fast-info': __fast_info,
+        'financials': __financials,
+        'history-metadata': __history_metadata,
+        'income-stmt': __income_stmt,
+        'info': __info,
+        'institutional-holders': __institutional_holders,
+        'isin': __isin,
+        'major-holders': __major_holders,
+        'mutualfund-holders': __mutualfund_holders,
+        'news': __news,
+        'splits': __splits
     }
 
 
 def _add_ticker_api_routes(app: Flask) -> None:
-    @app.get('/api/<endpoint>')
-    def ticker_callback(endpoint: str) -> Response:
-        endpoint_map: dict[str, Callable] = _get_endpoint_map()
+    @app.get('/api/ticker/<endpoint>')
+    def respond(endpoint: str) -> Response:
+        ticker: str = request.args.get('ticker')
 
-        try:
-            ticker: str = request.headers['ticker']
-        except KeyError:
+        if ticker == None:
             abort(400, description='Ticker not given')
 
+        endpoint_map: dict[str, Callable] = __get_endpoint_map()
         result: Any = endpoint_map[endpoint](ticker.upper())
 
         if type(result) == str:
@@ -43,65 +42,65 @@ def _add_ticker_api_routes(app: Flask) -> None:
         return jsonify(result)
 
 
-def _actions(ticker: str) -> str:
+def __actions(ticker: str) -> str:
     return Ticker(ticker).get_actions().to_json()
 
 
-def _balance_sheet(ticker: str) -> str:
+def __balance_sheet(ticker: str) -> str:
     return Ticker(ticker).get_balance_sheet().to_json()
 
 
-def _cash_flow(ticker: str) -> str:
+def __cash_flow(ticker: str) -> str:
     return Ticker(ticker).get_cash_flow().to_json()
 
 
-def _capital_gains(ticker: str) -> list:
+def __capital_gains(ticker: str) -> list:
     return Ticker(ticker).get_capital_gains()
 
 
-def _dividends(ticker: str) -> str:
+def __dividends(ticker: str) -> str:
     return Ticker(ticker).get_dividends().to_json()
 
 
-def _fast_info(ticker: str) -> str:
+def __fast_info(ticker: str) -> str:
     return Ticker(ticker).get_fast_info().toJSON()
 
 
-def _financials(ticker: str) -> str:
+def __financials(ticker: str) -> str:
     return Ticker(ticker).get_financials().to_json()
 
 
-def _history_metadata(ticker: str) -> str:
+def __history_metadata(ticker: str) -> str:
     return str(Ticker(ticker).get_history_metadata())
 
 
-def _income_stmt(ticker: str) -> str:
+def __income_stmt(ticker: str) -> str:
     return Ticker(ticker).get_income_stmt().to_json()
 
 
-def _info(ticker: str) -> dict:
+def __info(ticker: str) -> dict:
     return Ticker(ticker).get_info()
 
 
-def _institutional_holders(ticker: str) -> str:
+def __institutional_holders(ticker: str) -> str:
     return Ticker(ticker).get_institutional_holders().to_json()
 
 
-def _isin(ticker: str) -> str:
+def __isin(ticker: str) -> str:
     return f'"{Ticker(ticker).get_isin()}"'
 
 
-def _major_holders(ticker: str) -> str:
+def __major_holders(ticker: str) -> str:
     return Ticker(ticker).get_major_holders().to_json()
 
 
-def _mutualfund_holders(ticker: str) -> str:
+def __mutualfund_holders(ticker: str) -> str:
     return Ticker(ticker).get_mutualfund_holders().to_json()
 
 
-def _news(ticker: str) -> list:
+def __news(ticker: str) -> list:
     return Ticker(ticker).get_news()
 
 
-def _splits(ticker: str) -> str:
+def __splits(ticker: str) -> str:
     return Ticker(ticker).get_splits().to_json()

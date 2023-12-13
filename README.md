@@ -6,9 +6,7 @@ The Y!Finance API provides what the official Yahoo! Finance API did until it was
 ## How to run the app
 
 1. Use the virtual environment: `python3 -m venv .venv`
-
 1. Install the required dependencies: `pip3 install -r requirements.txt`
-
 1. Run the app: `flask --app yfinance_api run`
 
 

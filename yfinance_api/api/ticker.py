@@ -1,6 +1,9 @@
 import json
+import pandas as pd
+import yfinance as yf
 from typing import Any, Callable
-from flask import Flask, Response, abort, jsonify, request
+from flask import Flask, Response, abort, jsonify, request, send_file
+from io import BytesIO
 from yfinance import Ticker
 
 
@@ -26,6 +29,21 @@ def __get_endpoint_map() -> dict[str, Callable]:
 
 
 def _add_ticker_api_routes(app: Flask) -> None:
+    @app.get('/api/ticker/download')
+    def respond_download() -> Response:
+        ticker: str = request.args.get('ticker')
+
+        if ticker == None:
+            abort(400, description='Ticker not given')
+
+        csv_file = BytesIO()
+        df: pd.DataFrame = yf.download(ticker)
+        df.to_csv(csv_file, index=False)
+        csv_file.seek(0)
+
+        return send_file(csv_file, 'text/csv', True, f'{ticker}.csv')
+
+
     @app.get('/api/ticker/<endpoint>')
     def respond(endpoint: str) -> Response:
         ticker: str = request.args.get('ticker')

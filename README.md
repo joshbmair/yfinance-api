@@ -12,9 +12,7 @@ The Y!Finance API provides what the official Yahoo! Finance API did until it was
 
 ## Endpoints
 
-### Ticker
-
-The ticker endpoints serve data about a specific stock ticker. Each endpoint requires a `ticker` parameter. For example: `http://127.0.0.1:5000/api/actions?ticker=MSFT`.
+The endpoints serve JSON data about a specific stock ticker -- With the exception of `/api/download`, which responds with a CSV file. Each endpoint requires a `ticker` parameter. For example: `http://127.0.0.1:5000/api/actions?ticker=MSFT`.
 
 Here are all the endpoints:
 
@@ -23,6 +21,7 @@ Here are all the endpoints:
 * `/api/cash-flow`
 * `/api/capital-gains`
 * `/api/dividends`
+* `/api/downloads`
 * `/api/fast-info`
 * `/api/financials`
 * `/api/history-metadata`

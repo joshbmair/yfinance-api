@@ -29,7 +29,7 @@ def __get_endpoint_map() -> dict[str, Callable]:
 
 
 def _add_ticker_api_routes(app: Flask) -> None:
-    @app.get('/api/ticker/download')
+    @app.get('/api/download')
     def respond_download() -> Response:
         ticker: str = request.args.get('ticker')
 
@@ -44,7 +44,7 @@ def _add_ticker_api_routes(app: Flask) -> None:
         return send_file(csv_file, 'text/csv', True, f'{ticker}.csv')
 
 
-    @app.get('/api/ticker/<endpoint>')
+    @app.get('/api/<endpoint>')
     def respond(endpoint: str) -> Response:
         ticker: str = request.args.get('ticker')
 

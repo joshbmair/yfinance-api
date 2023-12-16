@@ -14,23 +14,23 @@ The Y!Finance API provides what the official Yahoo! Finance API did until it was
 
 ### Ticker
 
-The ticker endpoints serve data about a specific stock ticker. Each endpoint requires a `ticker` parameter. For example: `http://127.0.0.1:5000/api/ticker/actions?ticker=MSFT`.
+The ticker endpoints serve data about a specific stock ticker. Each endpoint requires a `ticker` parameter. For example: `http://127.0.0.1:5000/api/actions?ticker=MSFT`.
 
 Here are all the endpoints:
 
-* `/api/ticker/actions`
-* `/api/ticker/balance-sheet`
-* `/api/ticker/cash-flow`
-* `/api/ticker/capital-gains`
-* `/api/ticker/dividends`
-* `/api/ticker/fast-info`
-* `/api/ticker/financials`
-* `/api/ticker/history-metadata`
-* `/api/ticker/income-stmt`
-* `/api/ticker/info`
-* `/api/ticker/institutional-holders`
-* `/api/ticker/isin`
-* `/api/ticker/major-holders`
-* `/api/ticker/mutualfund-holders`
-* `/api/ticker/news`
-* `/api/ticker/splits`
+* `/api/actions`
+* `/api/balance-sheet`
+* `/api/cash-flow`
+* `/api/capital-gains`
+* `/api/dividends`
+* `/api/fast-info`
+* `/api/financials`
+* `/api/history-metadata`
+* `/api/income-stmt`
+* `/api/info`
+* `/api/institutional-holders`
+* `/api/isin`
+* `/api/major-holders`
+* `/api/mutualfund-holders`
+* `/api/news`
+* `/api/splits`

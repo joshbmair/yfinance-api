@@ -1,6 +1,6 @@
 # Y!Finance API
 
-The Y!Finance API provides what the official Yahoo! Finance API did until it was shut down. Using the Python libraries [Flask](https://pypi.org/project/Flask/) the [yfinance](https://pypi.org/project/yfinance/) library, Y!Finance API serves financial data from [Yahoo! Finance](https://finance.yahoo.com/).
+The Y!Finance API provides what the official Yahoo! Finance API did until it was shut down. Using the Python libraries [Flask](https://pypi.org/project/Flask/) and [yfinance](https://pypi.org/project/yfinance/), Y!Finance API serves financial data from [Yahoo! Finance](https://finance.yahoo.com/).
 
 
 ## How to run the app
